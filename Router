@@ -11,7 +11,12 @@ namespace Router
         static void Main(string[] args)
         {
 
-            Test t1 = new Test(10000,2000,15,10);
+            Test t1 = new Test(100000,100000,15,10);
+            Console.WriteLine();
+            t1.HeapTest();
+            Console.WriteLine();
+            t1.UnsortedListTest();
+            Console.WriteLine();
 
         }
     }
