@@ -1,0 +1,77 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+namespace Router
+{
+    class Test
+    {
+        public Test(int A, int B, int M, int N)
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            Random r = new Random();
+
+            stopWatch.Start();
+            Object<int>[] o = new Object<int>[A+1];
+            o[A] = new Object<int>(r.Next(1, N), r.Next(1, 20), 2, 10);
+
+            for (int i = 0; i < A; i++)
+            {
+                int a = r.Next(1, M);
+                int b = r.Next(1, 4);
+                int c = r.Next(1,20);
+                o[i] = new Object<int>(a, c, b, 10);
+               // Console.WriteLine("a = '{0}' b = '{1}'", a, b);
+            }
+            stopWatch.Stop();
+
+            Console.WriteLine("Initialization time: {0}", stopWatch.Elapsed);
+
+
+            stopWatch.Start();
+            UnsortedList<int> l1 = new UnsortedList<int>();
+            for (int i = 0; i < A; i++)
+            {
+                l1.Add(o[i]);
+            }
+            stopWatch.Stop();
+            Console.WriteLine("Inserting into Unsorted List time: {0}", stopWatch.Elapsed);
+
+            stopWatch.Start();
+            for (int i = 0; i < B; i++)
+            {
+                l1.ReturnMin();
+            }
+
+            l1.Add(o[A]);
+            stopWatch.Stop();
+            Console.WriteLine("Deleting from Unsorted List and inserting 1 elemento time: {0}", stopWatch.Elapsed);
+
+
+
+            Stopwatch stopWatch2 = new Stopwatch();
+
+            stopWatch.Start();
+            Heap<int> heap = new Heap<int>(A + 1);
+            
+            for (int i = 0; i < A; i++)
+            {
+                heap.Insert(o[i]);
+            }
+            stopWatch.Stop();
+            Console.WriteLine("Inserting into Heap time: {0}", stopWatch.Elapsed);
+
+            stopWatch.Start();
+            heap.Check();
+            Console.WriteLine("max index = {0}", heap.Max());
+            for (int i = 0; i < B; i++ )
+                heap.DeleteMax();
+            heap.Insert(o[A]);
+            stopWatch.Stop();
+            Console.WriteLine("Deleting from Heap and inserting one element time: {0}", stopWatch.Elapsed);
+        }
+    }
+}
