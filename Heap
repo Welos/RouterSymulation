@@ -67,7 +67,8 @@ namespace Router
             data[1] = data[HeapSize];
             data[HeapSize] = null;
             HeapSize--;
-            MoveDownHeap(1);
+            if(HeapSize!=0)
+                MoveDownHeap(1);
         }
 
         public void Construct(int index)
