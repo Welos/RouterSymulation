@@ -23,7 +23,7 @@ namespace Router
         public abstract void Insert(Object<T> ob);
         public abstract Object<T> Delete();
 
-        public void Test(int A, int B, int M, int N)
+        public TimeSpan Test(int A, int B, int M, int N)
         {
             Stopwatch stopWatch = new Stopwatch();
             Random r = new Random();
@@ -58,7 +58,7 @@ namespace Router
             stopWatch.Stop();
             Console.WriteLine("Deleting and insertingII time time: {0}", stopWatch.Elapsed);
 
-            
+            return stopWatch.Elapsed;
         }
         
     }
