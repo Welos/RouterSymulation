@@ -1,12 +1,9 @@
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Router
 {
-    public class Heap<T> where T: new()
+    public class Heap<T> : PriorityQueue<T> where T: new()
     {
         private Object<T>[] data;
         public int HeapSize;
@@ -26,7 +23,7 @@ namespace Router
             data[index1] = aux;
         }
 
-        public void Insert(Object<T> ob)
+        override public void Insert(Object<T> ob)
         {
             HeapSize++;
             data[HeapSize] = ob;
@@ -62,13 +59,14 @@ namespace Router
             }
         }
 
-        public void DeleteMax()
+        override public Object<T> Delete()
         {
             data[1] = data[HeapSize];
             data[HeapSize] = null;
             HeapSize--;
             if(HeapSize!=0)
                 MoveDownHeap(1);
+            return data[1];
         }
 
         public void Construct(int index)
@@ -100,7 +98,7 @@ namespace Router
             {
                 if (heap.Max() > prev) throw new Exception("Error in Heap");
                 prev = heap.Max();
-                heap.DeleteMax();
+                heap.Delete();
             }
         }
         public void DrawTheHeap()
