@@ -1,0 +1,65 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Diagnostics;
+using System.Threading.Tasks;
+
+namespace Router
+{
+    abstract public class PriorityQueue<T> where T: new()
+    {
+        protected Object<T>[] o;
+        protected int numberOfInsertedElements;
+        protected int numberOfDeletedElements;
+
+        public void initialization(int A, int B, int M, int N)
+        {
+
+            o = new Object<T>[A + 1];
+            
+        }
+
+        public abstract void Insert(Object<T> ob);
+        public abstract Object<T> Delete();
+
+        public void Test(int A, int B, int M, int N)
+        {
+            Stopwatch stopWatch = new Stopwatch();
+            Random r = new Random();
+
+            stopWatch.Start();
+            initialization(A, B, M, N);
+
+            stopWatch.Stop();
+
+            stopWatch.Start();
+            for (int i = 0; i < A; i++)
+            {
+                int a = r.Next(1, M);
+                int b = r.Next(1, 4);
+                int c = r.Next(1, 20);
+                Insert(new Object<T>(a, c, b, new T()));
+            }
+
+            stopWatch.Stop();
+            Console.WriteLine("Inserting time: {0}", stopWatch.Elapsed);
+
+            stopWatch.Start();
+            for (int i = 0; i < B; i++)
+            {
+                int a = r.Next(1, N);
+                int b = r.Next(1, 4);
+                int c = r.Next(1, 20);
+                Delete();
+                Insert(new Object<T>(a, c, b, new T()));
+            }
+
+            stopWatch.Stop();
+            Console.WriteLine("Deleting and insertingII time time: {0}", stopWatch.Elapsed);
+
+            
+        }
+        
+    }
+}
