@@ -1,12 +1,8 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Router
 {
-        class UnsortedList<T> where T: new()
+        class UnsortedList<T> : PriorityQueue<T> where T: new()
         {
             public Element first;
             private Element last;
@@ -36,7 +32,7 @@ namespace Router
                     prev = null;
                 }
             }
-            public void Add(Object<T> ob)
+            override public void Insert(Object<T> ob)
             {
                 Element newElement = new Element(ob);
                 if (first == null)
@@ -59,7 +55,7 @@ namespace Router
 
                 }
             }
-            public Object<T> ReturnMin()
+            override public Object<T> Delete()
             {
                 Element current = this.first;
                 int min = current.ob.key;
@@ -98,5 +94,7 @@ namespace Router
                 }
                 return current.ob;
             }
+
+            
         }
 }
