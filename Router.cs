@@ -10,30 +10,25 @@ namespace Router
 {
     class Program
     {
-        static TimeSpan TestOfUnsortedList(int A, int B, int M, int N)
-        {
+        static TimeSpan TestOfUnsortedList(int A, int B, int M, int N) // funkcja tworzaca liste oraz inicjalizujaca funkcje testowa / 
+        {                                                              // zwraca czas wykonania testu
             UnsortedList<int> l1 = new UnsortedList<int>();
-            
-            return l1.Test( A, B, M, N);
+
+            return l1.Test(A, B, M, N);
 
         }
 
-        static TimeSpan TestOfHeap(int A, int B, int M, int N)
-        {
+        static TimeSpan TestOfHeap(int A, int B, int M, int N)  // funkcja tworzaca stog oraz inicjalizujaca funkcje testowa / 
+        {                                                       // zwraca czas wykonania testu
             Heap<int> heap = new Heap<int>(A + 1);
-            
+
             return heap.Test(A, B, M, N);
 
         }
 
         static void Main(string[] args)
         {
-            int task = 0;
 
-            Console.WriteLine("Dla aplikacji testujacej wpisz 0, dla symulacji 1\n");
-            task = Convert.ToInt32(Console.ReadLine());
-            if (task == 0)
-            {
                 int A = 10000; int B = 10001; int M = 20; int N = 15;
                 Console.WriteLine("Wpisz wartosc A, ktora bedzie iloscia elementow w kolejce." + "\r\nA = ");
                 A = Convert.ToInt32(Console.ReadLine());
@@ -45,24 +40,27 @@ namespace Router
                 N = Convert.ToInt32(Console.ReadLine());
 
                 Stopwatch stopWatchAll = new Stopwatch();
+                Stopwatch stopWatchEach = new Stopwatch();
                 StreamWriter intoHeap = new StreamWriter("wynikiStogu1.txt");
                 StreamWriter intoList = new StreamWriter("wynikiListy1.txt");
 
                 stopWatchAll.Start();
+                stopWatchEach.Start();
                 Console.WriteLine("List");
-                intoList.WriteLine("Total time of List Test :" + TestOfUnsortedList(A, B, M, N));
+                intoList.WriteLine("Times of List Test :" + TestOfUnsortedList(A, B, M, N));
+                stopWatchEach.Stop();
+                intoList.WriteLine("Total Time of list test : " + stopWatchEach.Elapsed);
+                stopWatchEach.Start();
                 Console.WriteLine("Heap");
-                intoHeap.WriteLine("Total time of Heap Test :" + TestOfHeap(A, B, M, N));
+                intoHeap.WriteLine("Times of Heap Test :" + TestOfHeap(A, B, M, N));
+                stopWatchEach.Stop();
+                intoHeap.WriteLine("Total time of Heap test : " + stopWatchEach.Elapsed);
                 stopWatchAll.Stop();
-
                 Console.WriteLine("Total operation time: {0}", stopWatchAll.Elapsed);
-
+                
+                
                 intoHeap.Close();
                 intoList.Close();
-            }
-
-            if(task==1)
-            {
 
 
 
