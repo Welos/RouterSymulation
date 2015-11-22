@@ -3,17 +3,17 @@ using System;
 
 namespace Router
 {
-    public class Heap<T> : PriorityQueue<T> where T: new()
-    {
-        private Object<T>[] data;
+    public class Heap<T> : PriorityQueue<T> where T : new() // szerszy opis stogu znajduje sie w projekcie z symulacja / 
+    {                                                       // jedyna roznica polega na uzyciu szablonow w tescie 
+        private Object<T>[] data;                           // w symulacji szablony byly zbedne i jedynie utrudnialy zadanie
         public int HeapSize;
-        
 
-        public Heap( int num)
+
+        public Heap(int num)
         {
             //dodaję zerowy element ponieważ zaczynamy wypełniać tablicę od indeksu 1
             data = new Object<T>[num];
-            data[0]= null;
+            data[0] = null;
         }
 
         private void Swap(int index0, int index1)
@@ -64,7 +64,7 @@ namespace Router
             data[1] = data[HeapSize];
             data[HeapSize] = null;
             HeapSize--;
-            if(HeapSize!=0)
+            if (HeapSize != 0)
                 MoveDownHeap(1);
             return data[1];
         }
@@ -103,10 +103,10 @@ namespace Router
         }
         public void DrawTheHeap()
         {
-                                 Console.WriteLine("                   {0}                  \n" +
-                                         "               {1}                      {2}      \n"    +
-                                         "        {3}         {4}            {5}       {6}     \n"+
-                                         "       {7}   {9}        {9}  {10}         {11}  {12}         {13} {14}\n", data[1].key, data[2].key, data[3].key, data[4].key, data[5].key, data[6].key, data[7].key, data[8].key, data[9].key, data[10].key, data[11].key, data[12].key, data[13].key, data[14].key, data[15].key);
+            Console.WriteLine("                   {0}                  \n" +
+                    "               {1}                      {2}      \n" +
+                    "        {3}         {4}            {5}       {6}     \n" +
+                    "       {7}   {9}        {9}  {10}         {11}  {12}         {13} {14}\n", data[1].key, data[2].key, data[3].key, data[4].key, data[5].key, data[6].key, data[7].key, data[8].key, data[9].key, data[10].key, data[11].key, data[12].key, data[13].key, data[14].key, data[15].key);
         }
     }
 }
