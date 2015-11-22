@@ -7,25 +7,26 @@ using System.Threading.Tasks;
 
 namespace Router
 {
-    abstract public class PriorityQueue<T> where T: new()
+    abstract public class PriorityQueue<T> where T : new()  // klasa abstrakcyjna kolejnki priorytetowej / pod nia podpieta jest lista nieuporzadkowana oraz stog
     {
         protected Object<T>[] o;
         protected int numberOfInsertedElements;
         protected int numberOfDeletedElements;
 
-        public void initialization(int A, int B, int M, int N)
-        {
+        public void initialization(int A, int B, int M, int N)  // inicjalizacja tablicy z ktorej korzysta stog i lista/ jest w niej A+1 elementow/
+        {                                                       // ze wzgledu na liczenie ich w stogu od 1 / I element w stogu jest zawsze null
 
             o = new Object<T>[A + 1];
-            
+
         }
 
         public abstract void Insert(Object<T> ob);
         public abstract Object<T> Delete();
 
-        public TimeSpan Test(int A, int B, int M, int N)
-        {
+        public TimeSpan Test(int A, int B, int M, int N)  // metoda testujaca, zwraca czas testu danej kolejki priorytetowej / 
+        {                                                 // testowany jest czas wlozenia A elementow oraz usuniecia i dodania B razy elemntu
             Stopwatch stopWatch = new Stopwatch();
+            
             Random r = new Random();
 
             stopWatch.Start();
@@ -43,7 +44,7 @@ namespace Router
             }
 
             stopWatch.Stop();
-            Console.WriteLine("Inserting time: {0}", stopWatch.Elapsed);
+            Console.WriteLine("A times Inserting time: {0}", stopWatch.Elapsed);
 
             stopWatch.Start();
             for (int i = 0; i < B; i++)
@@ -56,10 +57,10 @@ namespace Router
             }
 
             stopWatch.Stop();
-            Console.WriteLine("Deleting and insertingII time time: {0}", stopWatch.Elapsed);
+            Console.WriteLine("B times Deleting and inserting time: {0}", stopWatch.Elapsed);
 
             return stopWatch.Elapsed;
         }
-        
+
     }
 }
